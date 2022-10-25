@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {UserProfileFormModel} from '../types/user-profile-form-model';
 
 @Component({
   selector: 'app-typed-form-demo',
@@ -9,16 +10,26 @@ import {FormBuilder, Validators} from '@angular/forms';
 export class TypedFormDemoComponent implements OnInit {
   cities = ['Taipei', 'Taichung', 'Kaohsiung'];
   // infer by TypeScript
-  form = this.fb.group({
-    email: this.fb.control('i@me.com', {validators: [Validators.email, Validators.required]}),
-    password: this.fb.control('abc123', {validators: [Validators.minLength(6)]}),
-    address: this.fb.control('No. 201, Furong Rd., Houli Dist.'),
-    city: this.fb.control('Taichung'),
-    zip: this.fb.control('421'),
-    checkMeOut: this.fb.control(true),
-  });
+  // form = this.fb.group({
+  //   email: this.fb.control('i@me.com', {validators: [Validators.email, Validators.required]}),
+  //   password: this.fb.control('abc123', {validators: [Validators.minLength(6)]}),
+  //   address: this.fb.control('No. 201, Furong Rd., Houli Dist.'),
+  //   city: this.fb.control('Taichung'),
+  //   zip: this.fb.control('421'),
+  //   checkMeOut: this.fb.control(true),
+  // });
+
+  form: FormGroup<UserProfileFormModel>;
 
   constructor(private fb: FormBuilder) {
+    this.form = this.fb.group({
+      email: this.fb.control('i@me.com', {validators: [Validators.email, Validators.required]}),
+      password: this.fb.control('abc123', {validators: [Validators.minLength(6)]}),
+      address: this.fb.control('No. 201, Furong Rd., Houli Dist.'),
+      city: this.fb.control('Taichung'),
+      zip: this.fb.control('421'),
+      checkMeOut: this.fb.control(true),
+    });
   }
 
   ngOnInit(): void {
