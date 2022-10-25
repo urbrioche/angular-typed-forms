@@ -23,8 +23,8 @@ export class TypedFormDemoComponent implements OnInit {
 
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group<UserProfileFormModel>({
-      email: this.fb.control('i@me.com', {validators: [Validators.email]}),
-      password: this.fb.control('abc123'),
+      email: this.fb.control('i@me.com', {validators: [Validators.email, Validators.required]}),
+      password: this.fb.control('abc123', {validators:[Validators.minLength(6)]}),
       address: this.fb.control('No. 201, Furong Rd., Houli Dist.'),
       city: this.fb.control('Taichung City'),
       zip: this.fb.control('421'),

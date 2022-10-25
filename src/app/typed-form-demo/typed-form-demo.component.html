@@ -3,11 +3,36 @@
   <form class="row g-3" [formGroup]="form">
     <div class="col-md-6">
       <label for="inputEmail4" class="form-label">Email</label>
-      <input type="email" class="form-control" id="inputEmail4" [formControl]="form.controls.email">
+      <input
+        type="email"
+        class="form-control"
+        id="inputEmail4"
+        [formControl]="form.controls.email"
+        [class.is-valid]="form.controls.email.valid"
+        [class.is-invalid]="form.controls.email.invalid"
+      >
+      <div class="invalid-feedback">
+        <ng-container *ngIf="form.controls.email.errors?.['required']">
+          email is required
+        </ng-container>
+        <ng-container *ngIf="form.controls.email.errors?.['email']">
+          email is not correct
+        </ng-container>
+      </div>
     </div>
     <div class="col-md-6">
       <label for="inputPassword4" class="form-label">Password</label>
-      <input type="password" class="form-control" id="inputPassword4" formControlName="password">
+      <input
+        type="password"
+        class="form-control"
+        id="inputPassword4"
+        [formControl]="form.controls.password"
+        [class.is-valid]="form.controls.password.valid"
+        [class.is-invalid]="form.controls.password.invalid"
+      >
+      <div class="invalid-feedback">
+        the minimum length of password should be {{ form.controls.password.errors?.['minlength']?.['requiredLength'] }}
+      </div>
     </div>
     <div class="col-12">
       <label for="inputAddress" class="form-label">Address</label>
@@ -44,4 +69,7 @@
 </div>
 <pre>
   form.valid = {{ form.valid }}
+  form.status = {{ form.status }}
+  form.controls.email.errors = {{ form.controls.email.errors | json }}
+  form.controls.password.errors = {{ form.controls.password.errors | json }}
 </pre>
