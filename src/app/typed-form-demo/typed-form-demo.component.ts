@@ -1,6 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {UserProfileFormModel} from '../types/user-profile-form-model';
+import {ToForm} from '../types/to.form';
+import {UserProfile} from '../types/user.profile';
+
+// infer from UserProfile domain model
+type UserProfileForm = ToForm<UserProfile>;
 
 @Component({
   selector: 'app-typed-form-demo',
@@ -19,7 +23,11 @@ export class TypedFormDemoComponent implements OnInit {
   //   checkMeOut: this.fb.control(true),
   // });
 
-  form: FormGroup<UserProfileFormModel>;
+  // pre-defined FormGroup model
+  // form: FormGroup<UserProfileFormModel>;
+
+  // we have domain model and FormGroup model infer from domain model
+  form: FormGroup<UserProfileForm>;
 
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
