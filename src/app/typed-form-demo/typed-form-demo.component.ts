@@ -41,5 +41,13 @@ export class TypedFormDemoComponent implements OnInit {
     this.form.controls.zip.disable();
   }
 
+  update(): void {
+    this.form.patchValue({
+      email: 'iamhere@me.com',
+      address: 'haha',
+      // typo, 不接受一個不存在的屬性
+      // adress: ''
+    })
+  }
 }
 
