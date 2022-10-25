@@ -22,6 +22,7 @@ export class TypedFormDemoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.form.controls.zip.disable();
   }
 
 }
