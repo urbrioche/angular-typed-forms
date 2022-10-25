@@ -1,5 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UserProfileFormModel } from '../types/user-profile-form.model';
 
 @Component({
   selector: 'app-typed-form-demo',
@@ -8,15 +9,26 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 })
 export class TypedFormDemoComponent implements OnInit {
 
-  form = this.fb.group({
-    email: this.fb.control('i@me.com'),
-    password: this.fb.control('abc123'),
-    address: this.fb.control('No. 201, Furong Rd., Houli Dist.'),
-    city: this.fb.control('Taichung City'),
-    zip: this.fb.control('421'),
-  });
+  // infer by TypeScript
+  // form = this.fb.group({
+  //   email: this.fb.control('i@me.com'),
+  //   password: this.fb.control('abc123'),
+  //   address: this.fb.control('No. 201, Furong Rd., Houli Dist.'),
+  //   city: this.fb.control('Taichung City'),
+  //   zip: this.fb.control('421'),
+  // });
+
+  // predefined type model
+  form: FormGroup<UserProfileFormModel>;
 
   constructor(private fb: FormBuilder) {
+    this.form = this.fb.group<UserProfileFormModel>({
+      email: this.fb.control('i@me.com', {validators: [Validators.email]}),
+      password: this.fb.control('abc123'),
+      address: this.fb.control('No. 201, Furong Rd., Houli Dist.'),
+      city: this.fb.control('Taichung City'),
+      zip: this.fb.control('421'),
+    });
   }
 
   ngOnInit(): void {
@@ -24,3 +36,4 @@ export class TypedFormDemoComponent implements OnInit {
   }
 
 }
+
