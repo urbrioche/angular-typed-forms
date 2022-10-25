@@ -44,4 +44,13 @@ export class TypedFormDemoComponent implements OnInit {
     this.form.controls.zip.disable();
   }
 
+  update(): void {
+    this.form.patchValue({
+      email: 'iamhere@me.com',
+      address: 'haha',
+      // sometimes we have typo, strong type can check the error in compile time instead of runtime
+      // adress: '',
+      city: 'Taipei',
+    })
+  }
 }
