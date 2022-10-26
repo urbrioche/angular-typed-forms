@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ToForm} from '../types/to.form';
-import {UserProfile} from '../types/user.profile';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToForm } from '../types/to.form';
+import { UserProfile } from '../types/user.profile';
 
 // infer from UserProfile domain model
 type UserProfileForm = ToForm<UserProfile>;
@@ -38,6 +38,10 @@ export class TypedFormDemoComponent implements OnInit {
       zip: this.fb.control('421'),
       checkMeOut: this.fb.control(true),
     });
+
+    this.form.controls.city.valueChanges.subscribe(city => {
+      console.log(city);
+    });
   }
 
   ngOnInit(): void {
@@ -51,6 +55,6 @@ export class TypedFormDemoComponent implements OnInit {
       // sometimes we have typo, strong type can check the error in compile time instead of runtime
       // adress: '',
       city: 'Taipei',
-    })
+    });
   }
 }
